@@ -1,0 +1,246 @@
+##################################################################
+# This file contains the board and channel specific configurations 
+# This file should be edited ONLY ONCE during installation 
+# All parameters in this file are of the form parameter=value 
+# Parameter Name should not have spaces
+# 
+#################################################################
+
+################
+# GENERAL PARAMS
+################
+#Following needs to be initialized to 'cloud_player' or 'localization'
+product_skew=cloud_player
+#Following needs to be initialized to 'basic' or 'advanced'
+# In advanced mode there's no restriction on file names of signature and ads
+# basic mode is for India operations.
+product_mode=advanced
+# Channel, Headend and City names should follow the TrafficNomenclature format. 
+# Channel specifies the TV channel name passed through this board
+# Channel can only be 2 characters as expected by TBRTOOL
+channel=Auto
+# headend id can only be 3 digits as expected by TBRTOOL
+headend=001
+# city name can only be 2 characters as expected by TBRTOOL
+city=HY
+
+#hostname refers to the name of the board as it appears in log files
+#It is a good practice to set name as <Ch>_<City>_<HeadendID>
+hostname=Auto_001
+
+#################
+# PLAYLIST PARAMS
+#################
+# Choose between playlist manager and event manager applications
+playlist_manager=1
+#playlistdir and clipsdir specified should match with the specification in TBRTOOL
+#playlistdir should be a valid directory in /mnt in which playlist files will be present
+playlistdir=/mnt/ops/playlists
+#default_playlistdir should be a valid directory in /mnt in which default playlist files will be present
+default_playlistdir=/mnt/ops/defaultplaylists
+#default_playlist_file is the default playlist
+default_playlist_file=Playlist_YYYYMMDD+0d.zip
+#rescue dir
+rescuedir=/mnt/ops/rescue_files
+#signatures dir
+sigsdir=/mnt/ops/signatures
+#secondary elements
+bugsdir=/mnt/ops/bugs/
+#Please Note: path to local ads ts files is given in /etc/player3_config_localization.cfg
+#this folder is being watched for zip files.
+uploads_dir=/mnt/ops/uploads
+temporary_uploads_dir=/mnt/ops/temporary_uploads
+
+################
+# NETWORK PARAMS
+################
+#DHCP or Static ip
+#If DHCP is enabled ip,gw,netmask are not needed.
+dhcp=0
+#ip refers to the IP address of this board
+ip=10.0.6.123
+#gw refers to the IP address of the gateway 
+gw=10.0.6.1
+#netmask of the network to which this board is connected
+netmask=255.255.254.0
+#dns server to use, to use multiple address give a list in the same line
+# separated by a space
+dns=208.67.222.222
+#server ip;for tftp etc
+server=10.0.0.151
+
+#sshd_port refers to SSH Server listening port. Make sure that this port does not conflict
+#with other server ports.
+sshd_port=22
+#ftpd_port refers to FTP Server listening port. Make sure that this port does not conflict
+#with other server ports.
+ftpd_port=21
+
+
+##############
+# OTHER PARAMS
+##############
+# Timezone should be same as any file name in the directory /usr/share/zoneinfo
+timezone=Asia/Calcutta
+#chn_time_offset is time in seconds by which ntp time is ahead of channel time
+#chn_time_offset = (chn_time-ntp_time); if chn is ahead then it is positive number
+# else it is negative
+chn_time_offset=0
+
+#if ntpsync is 0 system time is not synchronized to ntp
+#if ntpsync is 1 system time is synchronized during boot 
+# and every midnight
+ntpsync=1
+
+# splice trigger can be Preload_Play  Aborti  AFP, VFP, AVFP and DTMF
+splice_trigger=Aborti
+
+# test mode; if the board is a test unit then set it to 1
+# crontab reboot currently checks this variable
+test_mode=0
+
+#dartweb enabled
+#dartweb=0
+
+#IP address of machine for local date update
+#date_server=10.0.4.208
+
+#Number of times NTP update tried in the background 
+ntp_iterations=10
+
+#Time gap in seconds between successive NTP update try
+ntp_gap=2
+
+############### 
+# RELAYD PARAMS
+###############
+#if relay is 0 then the relay system is not used
+#if relay is 1 then the relay system is being used and the relay daemon 
+#controls the mode i.e. bypass or dart output
+relay=1
+
+###########################
+#Relay Params for AVLOOP  #
+###########################
+relay_aloop_normal_state=10000
+relay_aloop_timeout_state=4000
+relay_aloop_fatal_state=4000
+relay_vloop_normal_state=10000
+relay_vloop_timeout_state=3000
+relay_vloop_fatal_state=3000
+relay_avloop_fatal_state=2500
+
+#PARAMETERS GIVEN BELOW SHOULD NOT BE EDITED BY ANY INSTALLATION PERSON
+
+############### 
+# AVLOOP PARAMS
+###############
+avloop_frame_delay=85
+avloop_num_audio_channels=8
+avloop_audio_on=1
+# this is avsync adjustment parameter.
+avloop_audio_delay=20
+#avloop_dtmf_vol=2
+avloop_audio_in=plughw:APP32,1
+avloop_audio_out=plughw:APP32,2
+avloop_nice_val=-20
+adpd_nice_val=-20
+#avloop_hue=0
+#avloop_saturation=180
+#avloop_brightness=128
+#avloop_contrast=128
+#avloop_noise_reduction_on=0
+#avloop_lock_detect_interval=10
+#avloop_tvp5158_audio_rate=8000
+#avloop_flag_afp_with_dtmf_band=0
+# Allowed values for avloop_afp_stopi_enabled_flag are 0 and 1. When set to 0
+# stopi message will NEVER be sent to player to abruptly stop ad playback even
+# when tracking is turned on and says that promo duration does not match
+# expected. If set to 1 play will be aborted only when avloop_afp_tracking_enabled 
+# is set to 1 and the tracked promo/ad duration is not near the expected
+# duration
+avloop_afp_stopi_enabled_flag=0
+# Values : 576i or 480i or 1080i50 or 1080i60
+avloop_input_mode=1080i50
+# Values : 576i or 480i or 1080i50 or 1080i60
+avloop_output_mode=1080i50
+avloop_input_iface=HD-SDI
+avloop_output_iface=HD-SDI
+avloop_trigger_config_file=/etc/trigger_config.cfg
+avloop_player3_config_file=/etc/player3_config_localization.cfg
+# display_crop_height_offset adjusts the ad height by a small offset while 
+# the network ticker is seen at the bottom.  The older dart (dm368) boards have a 
+# capture bug where the capture has some offset.  This parameter is introduced 
+# so that we can use the same schedule from the dm368 boards for channels like CNBC awaaz.
+#display_crop_height_offset=0
+
+# Ts Input on IP related configuration
+#
+# ts_ip_input_flag will be set to 1 when ts input on ip is expected to be
+# handled
+ts_ip_input_flag=0
+avloop_ts_port=12800
+clock_port=12801
+scte35_pid=420
+avloop_audio_pids=412
+dartbus_enabled=0
+#The following dec_type parameter is required for decoding audio coming as input
+#in TS on ip. Decoder type: 0 ->AC3 1->AAC 2->MP2
+dec_type=2
+
+# To enable handling ac3/dolby embedded in HD-SDI the following needs to be
+# turned on by settin to 1
+ac3_enabled=0
+
+############# 
+# ADPD PARAMS
+#############
+adpd_player3_config_file=/etc/player3_config.cfg
+adpd_audio_playback_level_controller_flag=0
+#Allowed values for adpd_peak_pcm_value_local_ad ar -20 to 0. This is the db
+#level at which the AD has been created
+adpd_peak_pcm_value_local_ad=-3
+# Allows to playback AD audio at some db levels above or below the nw audio
+# input db levels. Allowed value are -3 tp +3 only integer values
+adpd_delta_db_wrto_nw_peak=1
+# adpd_bumper_based_splicing can take values 1 or 0 only. If set to 1 the player
+# will wait for the current detected ad to playout completely before ad will be
+# played(this is to allow very low delays with respect to n/w content) otherwise
+# when 0 nor mal splicing will happen
+adpd_bumper_based_splicing=0
+
+###############
+#OpenVPN PARAMS
+###############
+#0 ==> Disabled
+#1 ==> Enabled
+openvpn=0
+
+###################
+#vsftpd.conf PARAMS
+###################
+ftpd_control_port=21
+ftpd_data_port=21000
+ovpn_server_ip=pluto.amagi.com
+
+# specify broadcast start time for the day in HHMMSS 
+broadcast_start_time=060000
+
+#subtitles enabled
+subtitles=0
+
+#Collectd statistics daemon enable/disable by setting to on/off
+collectd=off
+#unified board Enabled or disable for PIRD
+unified_board=0
+
+
+# The time (hour and minute) at which the cron jobs (application restart, midnight firmware upgrade, etc.) will run.
+# Valid values are 0-23
+cron_job_hour=1
+# Valid values are 0-59
+cron_job_minutes=30
+
+# board reboot date of month.  Value should be in the range 01-31
+# if it is 0 monthly reboot is disabled.
+reboot_date=0

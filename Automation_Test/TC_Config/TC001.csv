@@ -1,0 +1,17 @@
+Complete path of file,Key,Value
+/etc/board.conf,product_skew,cloud_player
+/etc/board.conf,channel,Auto
+/etc/board.conf,headend,1
+/etc/board.conf,hostname,Auto_001
+/etc/board.conf,timezone,Asia/Calcutta
+/etc/board.conf,avloop_num_audio_channels,8
+/etc/board.conf,avloop_input_mode,1080i50
+/etc/board.conf,avloop_output_mode,1080i50
+/etc/board.conf,broadcast_start_time,60000
+/etc/player3_config.cfg,vid_in_format,1080i50
+/etc/player3_config.cfg,vid_out_format,1080i50
+/etc/player3_config.cfg,num_output_aud_channels,8
+/etc/player3_config.cfg,vid_pid,2064
+/etc/player3_config.cfg,aud_pids,"2,068,206,920,702,070"
+/root/playlistmanager/pm_config.cfg,cloud_address,http://10.0.7.211/
+/root/playlistmanager/pm_config.cfg,cloud_websocket_address,ws://10.0.7.211:8080/
